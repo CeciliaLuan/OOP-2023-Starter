@@ -20,6 +20,13 @@ public class DANI extends PApplet {
         return null;
     }
 
+	public void loadfile() {
+		String[] sonnet = loadStrings("sonnet.txt");
+		for (String s : sonnet) {
+			System.out.println(s);
+		}
+	}
+
 	public void setup() {
 		colorMode(HSB);
 
