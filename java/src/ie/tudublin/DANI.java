@@ -19,22 +19,21 @@ public class DANI extends PApplet {
 
 	public void setup() {
 		colorMode(HSB);
+		loadFile();
 
 	}
 
 	public void keyPressed() {
+        if (key == ' ') {
+            sonnet = writeSonnet();
+            for (String line : sonnet) {
+                System.out.println(line);
+            }
 
-	}
+        }
+    }
 
-	public void printModel() {
-		for (Word word : model) {
-			System.out.print(word + " ");
-			for (Follow follow : word.getFollows()) {
-				System.out.print(follow + " ");
-			}
-			System.out.println();
-		}
-	}
+	
 
 	float off = 0;
 
@@ -43,13 +42,21 @@ public class DANI extends PApplet {
 		for (String line : lines) {
 			String[] words = split(line, ',');
 			for (String w : words) {
-				w = w.replaceAll("[^\\w\\s]", "");
+				w = w.replaceAll("[^w\\s]","");
 				w = w.toLowerCase();
 			}
 		}
 	}
-
 	
+	public void printModel() {
+        for (Word word : model) {
+            System.out.print(word.getWord() + ": ");
+            for (Follow follow : word.getFollows()) {
+                System.out.print(follow.getWord() + "(" + follow.getCount() + ") ");
+            }
+            System.out.println();
+        }
+    }
 	
 	
 	public Word findWord(String str) {
@@ -82,30 +89,45 @@ public class DANI extends PApplet {
 		}
 		return sonnet;
 	}
+
+
 	public void draw() {
 		background(0);
 		fill(255);
 		noStroke();
 		textSize(20);
 		textAlign(CENTER, CENTER);
+		
 
 	}
 
+	//added follow class
+
 	public class Follow {
+
 		private String word;
 		private int count;
 	
-		public Follow(String word, int count) {
+		public Follow(String word, int count) {// Constructor that takes a word and a count
 			this.word = word;
 			this.count = count;
 		}
 	
-		public String getWord() {
+		public String getWord() {// Getter for the word
 			return word;
 		}
 	
 		public int getCount() {
-			return count;
+			return count;// Getter for the count
+
+		}
+
+		public void setWord(String word) {//setters word
+			this.word = word;
+		}
+
+		public void setCount(int count) {//setter count
+			this.count = count;
 		}
 	
 		public String toString() {
@@ -113,11 +135,13 @@ public class DANI extends PApplet {
 		}
 	}
 
+	//added word class
+
 	public class Word {
 		private String word;
 		private ArrayList<Follow> follows;
 	
-		public Word(String word) {
+		public Word(String word, ArrayList<Follow> arrayList) {
 			this.word = word;
 			this.follows = new ArrayList<Follow>();
 		}
@@ -145,11 +169,13 @@ public class DANI extends PApplet {
 		}
 	}
 
-
+	
 public static void main(String[] args) {
     PApplet.main("ie.tudublin.DANI");
 }
 }
+
+
 
 
 
