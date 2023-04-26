@@ -6,36 +6,22 @@ import processing.core.PApplet;
 
 public class DANI extends PApplet {
 
+	String[] sonnet;
+	ArrayList<Word> model = new ArrayList<Word>();
 
-
+	
 	public void settings() {
 		size(1000, 1000);
-		// fullScreen(SPAN);
+		//fullScreen(SPAN);
 	}
 
-	String[] sonnet;
-	private String w;
+
+
 
 	public String[] writeSonnet() {
 		return null;
 	}
 
-	public void loadfile() {
-		String[] sonnet = loadStrings("small.txt");
-		for(String s: sonnet)
-		{
-		String[] words = s.split(" "); // Split a string into an array of words
-        w.replaceAll("[^\\w\\s]",""); // Remove punction characters
-        s.toLowerCase(); // Convert a string to lower case 
-		}}
-
-	// prints the small.txt file
-	public void printModel() {
-		String[] small = loadStrings("small.txt");
-		for (String s : small) {
-			System.out.println(s);
-		}
-	}
 
 	public void setup() {
 		colorMode(HSB);
@@ -47,6 +33,27 @@ public class DANI extends PApplet {
 	}
 
 	float off = 0;
+
+	public void loadFile() {
+		String[] lines = loadStrings("small.txt");
+		for (String line : lines) {
+			String[] words = split(line, ',');
+			for (String w : words) {
+				w = w.replaceAll("[^\\w\\s]", "");
+				w = w.toLowerCase();
+			}
+		}
+	}
+
+	
+	public Word findWord(String str) {
+		for (Word w : model) {
+			if (w.getWord().equals(str)) {
+				return w;
+			}
+		}
+		return null;
+	}
 
 	public void draw() {
 		background(0);
@@ -78,7 +85,7 @@ public class DANI extends PApplet {
 			return word + ": " + count;
 		}
 	}
-	
+
 	public class Word {
 		private String word;
 		private ArrayList<Follow> follows;
@@ -110,8 +117,12 @@ public class DANI extends PApplet {
 			return sb.toString();
 		}
 	}
-}
 
+
+public static void main(String[] args) {
+    PApplet.main("ie.tudublin.DANI");
+}
+}
 
 
 
