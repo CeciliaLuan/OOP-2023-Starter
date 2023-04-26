@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Word {
     private String word;
-    private ArrayList<Follow> follows;
+    private ArrayList<Follow> follows = new ArrayList<>();
+    private String[] sonnet;
     
     public Word(String word, ArrayList<Follow> follows) {
         this.word = word;
@@ -29,6 +30,13 @@ public class Word {
         return sb.toString();
     }
 
+    public void findFollow(String str) {
+        for (String s : sonnet) {
+            if (s.contains(str)) {
+                System.out.println(s);
+            }
+        }
+    }
 
     
 }

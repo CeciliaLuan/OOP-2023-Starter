@@ -27,6 +27,38 @@ public class DANI extends PApplet {
 		}
 	}
 
+
+	public void findWord(String str) {
+		for (String s : sonnet) {
+			if (s.contains(str)) {
+				System.out.println(s);
+			}
+		}
+	}
+
+
+	//loads the small.txt file
+
+	public void loadfile() {
+		String[] small = loadStrings("small.txt");
+		for (String s : small) {
+			System.out.println(s);
+		}
+	}
+
+//prints the small.txt file
+	public void printModel() {
+		String[] small = loadStrings("small.txt");
+		for (String s : small) {
+			System.out.println(s);
+		}
+	}
+	
+	public void writeSonnet()
+	{
+		
+	}
+
 	public void setup() {
 		colorMode(HSB);
 
